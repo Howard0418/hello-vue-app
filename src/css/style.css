@@ -1,0 +1,271 @@
+body {
+    font-family: 'Segoe UI',
+        'Microsoft JhengHei',
+        Arial,
+        sans-serif;
+    background: #f7f7f7;
+    margin: 0;
+    padding: 0;
+}
+
+/* Card 元件樣式 */
+.card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(44, 92, 150, 0.10);
+    padding: 10px, 10px, 10px, 10px;
+    margin: 10px;
+    max-width: 1000px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 30px auto;
+    background: #fff;
+    padding: 24px;
+}
+
+header {
+    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 24px;
+}
+
+h1 {
+    font-size: 2rem;
+    color: #2c5C96;
+    margin: 0;
+}
+
+main {
+    display: flex;
+    gap: 24px;
+}
+
+.current-number-section {
+    flex: 1;
+    background: #f9fafb;
+    border-radius: 8px;
+    padding: 24px;
+    min-width: 320px;
+    box-sizing: border-box;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+.current-number-box {
+    background: #eaf0fa;
+    border: 2px solid #284e86;
+    border-radius: 8px;
+    text-align: center;
+    padding: 32px 0;
+    font-size: 3rem;
+    color: #2d5fd3;
+    font-weight: bold;
+    margin-bottom: 24px;
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.btn {
+    padding: 12px 0;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+.btn-blue {
+    background: #17a2b7;
+    color: #fff;
+}
+
+.btn-blue:hover {
+    background: #1c3e8a;
+}
+
+.btn-green {
+    background: #27a844;
+    color: #fff;
+}
+
+.btn-green:hover {
+    background: #1e874b;
+}
+
+.btn-yellow {
+    background: #fec107;
+    color: #000;
+}
+
+.btn-yellow:hover {
+    background: #e0a800;
+}
+
+.queue-info {
+    margin-top: 24px;
+    font-size: 1rem;
+    color: #555;
+}
+
+.patient-list-section {
+    flex: 2;
+    background: #f9fafb;
+    border-radius: 8px;
+    padding: 24px;
+    min-width: 480px;
+    box-sizing: border-box;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+.search-box {
+    margin-bottom: 16px;
+}
+
+#search-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 12px;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: 1px solid #d0d0d0;
+}
+
+#search-btn {
+    background: #175cb7e9;
+    color: #fff;
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: 1px solid #d0d0d0;
+}
+
+.patient-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.patient-item {
+    display: flex;
+    align-items: center;
+    background: #eaf0fa;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    padding: 16px;
+    gap: 16px;
+    transition: background 0.2s;
+}
+
+.patient-item.selected {
+    background: #d6eaff;
+}
+
+.patient-number {
+    font-size: 1.2rem;
+    font-weight: bold;
+    width: 48px;
+    text-align: center;
+    color: #2d5fd3;
+}
+
+.patient-sex {
+    font-size: 1.1rem;
+    width: 32px;
+    text-align: center;
+    border-radius: 50%;
+    padding: 4px 0;
+    color: #fff;
+    font-weight: bold;
+}
+
+.patient-sex.male {
+    background: #2d5fd3;
+    color: #4a8dcb;
+}
+
+.patient-sex.female {
+    background: #e573b5;
+}
+
+.patient-name {
+    font-size: 1.1rem;
+    font-weight: 500;
+    width: 100px;
+}
+
+.patient-id {
+    font-size: 1rem;
+    color: #888;
+    width: 120px;
+}
+
+.patient-status {
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 6px;
+    padding: 4px 12px;
+    margin-right: 8px;
+    color: #222;
+}
+
+.status-done {
+    background: #d1f7d6;
+    color: #27ae60;
+}
+
+.status-report {
+    background: #eaf0fa;
+    color: #2d5fd3;
+}
+
+.status-wait {
+    background: #fff3cd;
+    color: #ffc107;
+}
+
+.status-pending {
+    background: #ffe0e0;
+    color: #e573b5;
+}
+
+.action-btn {
+    margin-left: 8px;
+    padding: 6px 16px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+.action-call {
+    background: #27ae60;
+    color: #fff;
+}
+
+.action-call.selected {
+    border: 2px solid #2d5fd3;
+    background: #fff;
+    color: #2d5fd3;
+}
+
+.action-call:hover {
+    background: #1e874b;
+}
+
+.action-status {
+    background: #ffc107;
+    color: #fff;
+}
+
+.action-status:hover {
+    background: #e0a800;
+}
