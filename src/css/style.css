@@ -3,9 +3,7 @@ body {
         'Microsoft JhengHei',
         Arial,
         sans-serif;
-    background: #f7f7f7;
-    margin: 0;
-    padding: 0;
+    background: #f8f9fb;
 }
 
 /* Card 元件樣式 */
@@ -13,16 +11,16 @@ body {
     background: #fff;
     border-radius: 16px;
     box-shadow: 0 4px 16px rgba(44, 92, 150, 0.10);
-    padding: 10px, 10px, 10px, 10px;
-    margin: 10px;
-    max-width: 1000px;
+    padding: 5px, 5px;
+    margin: 5px;
+    max-width: 100%;
 }
 
 .container {
     max-width: 1200px;
-    margin: 30px auto;
+    margin: 5px auto;
     background: #fff;
-    padding: 24px;
+    padding: 5px;
 }
 
 header {
@@ -33,7 +31,26 @@ header {
 h1 {
     font-size: 2rem;
     color: #2c5C96;
-    margin: 0;
+    padding: 15px;
+    margin-left: 15px;
+    font-weight: 600;
+}
+
+.current_number_title {
+    color: #2c5C96;
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 10px 5px;
+    text-align: center;
+}
+
+.patient_list_title {
+    color: #2c5C96;
+    font-size: 1.5rem;
+    padding: 15px 15px;
+    margin: 15px 15px;
+    font-weight: bold;
+    text-align: left;
 }
 
 main {
@@ -43,9 +60,9 @@ main {
 
 .current-number-section {
     flex: 1;
-    background: #f9fafb;
+    background: #ffffff;
     border-radius: 8px;
-    padding: 24px;
+    padding: 5px 15px;
     min-width: 320px;
     box-sizing: border-box;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
@@ -57,9 +74,8 @@ main {
     border-radius: 8px;
     text-align: center;
     padding: 32px 0;
-    font-size: 3rem;
+    font-size: 4rem;
     color: #2d5fd3;
-    font-weight: bold;
     margin-bottom: 24px;
 }
 
@@ -110,25 +126,20 @@ main {
 .queue-info {
     margin-top: 24px;
     font-size: 1rem;
-    color: #555;
+    text-align: center;
 }
 
 .patient-list-section {
-    flex: 2;
-    background: #f9fafb;
-    border-radius: 8px;
-    padding: 24px;
-    min-width: 480px;
-    box-sizing: border-box;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+    padding: 15px;
+    min-width: 500px;
 }
 
 .search-box {
-    margin-bottom: 16px;
+    margin-bottom: 15px;
 }
 
 #search-input {
-    width: 100%;
+    width: 97%;
     padding: 10px;
     margin-bottom: 12px;
     font-size: 1rem;
@@ -155,7 +166,7 @@ main {
 .patient-item {
     display: flex;
     align-items: center;
-    background: #eaf0fa;
+    background: #ffffff;
     border-radius: 8px;
     margin-bottom: 12px;
     padding: 16px;
@@ -177,21 +188,22 @@ main {
 
 .patient-sex {
     font-size: 1.1rem;
-    width: 32px;
+    width: 23px;
     text-align: center;
-    border-radius: 50%;
-    padding: 4px 0;
+    border-radius: 10px;
+    padding: 6px 24px;
     color: #fff;
     font-weight: bold;
 }
 
 .patient-sex.male {
-    background: #2d5fd3;
+    background: #e4f2fd;
     color: #4a8dcb;
 }
 
 .patient-sex.female {
-    background: #e573b5;
+    background: #fbe4ec;
+    color: #ae3d69;
 }
 
 .patient-name {
@@ -209,30 +221,38 @@ main {
 .patient-status {
     font-size: 1rem;
     font-weight: 500;
-    border-radius: 6px;
-    padding: 4px 12px;
+    border-radius: 10px;
+    padding: 8px 24px;
     margin-right: 8px;
     color: #222;
 }
 
+/*已報到*/
 .status-done {
-    background: #d1f7d6;
-    color: #27ae60;
+    background: #d4edd0;
+    font-weight: bold;
+    color: #5a7f5e;
 }
 
+/*看報告*/
 .status-report {
-    background: #eaf0fa;
-    color: #2d5fd3;
+    background: #d0ecf0;
+    font-weight: bold;
+    color: #3e7682;
 }
 
+/*未報到*/
 .status-wait {
     background: #fff3cd;
-    color: #ffc107;
+    font-weight: bold;
+    color: #9e7925;
 }
 
+/*已報到*/
 .status-pending {
     background: #ffe0e0;
-    color: #e573b5;
+    font-weight: bold;
+    color: #4c7650;
 }
 
 .action-btn {
@@ -268,4 +288,20 @@ main {
 
 .action-status:hover {
     background: #e0a800;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #e0e0e0;
+    margin: 15px 15px;
+}
+
+.waiting_count {
+    color: #585f7b;
+    font-weight: bold;
+}
+
+.waiting_time {
+    color: #585f7b;
+    font-weight: bold;
 }

@@ -6,38 +6,47 @@
 
         <main>
             <div class="card">
+                <div class="current_number_title">
+                    目前叫號
+                </div>
                 <section class="current-number-section">
                     <div class="current-number-box">
-                        <span id="current-number">003</span>
+                        <span id="current-number">
+                            {{ padNumber(patients[currentIndex]?.number) }}
+                        </span>
                     </div>
                     <div class="button-group">
-                        <button id="prev-btn" class="btn btn-blue">上一號</button>
-                        <button id="next-btn" class="btn btn-green">下一號</button>
-                        <button id="skip-btn" class="btn btn-yellow">過號報到</button>
+                        <button class="btn btn-blue" @click="prevPatient">上一號</button>
+                        <button class="btn btn-green" @click="nextPatient">下一號</button>
+                        <button class="btn btn-yellow" @click="skipPatient">過號報到</button>
                     </div>
                     <div class="queue-info">
-                        <span>等候人數: <span id="waiting-count">2</span></span><br>
-                        <span>預估等候時間: <span id="waiting-time">10 分鐘</span></span>
+                        <span>等候人數: <span id="waiting-count" class="waiting_count">{{ waitingCount }}</span></span><br>
+                        <span>預估等候時間: <span id="waiting-time" class="waiting_time">{{ waitingTime }} 分鐘</span></span>
                     </div>
                 </section>
             </div>
             <div class="card">
+                <div class="patient_list_title">
+                    患者清單
+                </div>
+                <hr>
                 <section class="patient-list-section">
                     <div class="search-box">
-                        <input type="text" id="search-input" placeholder="輸入身分證ID查詢...">
+                        <input type="text" id="search-input" placeholder="輸入身分證ID查詢..." v-model="searchText">
                         <button id="search-btn" @click="sendPost">送出</button>
                     </div>
                     <ul id="patient-list" class="patient-list">
-                        <li class="patient-item" v-for="patient in patients" :key="patient.id">
-                            <span class="patient-number">{{ patient.number }}</span>
+                        <li class="patient-item" v-for="(patient, idx) in filteredPatients" :key="patient.id">
+                            <span class="patient-number">{{ padNumber(patient.number) }}</span>
                             <span class="patient-sex" :class="patient.sex == '1' ? 'male' : 'female'">{{
                                 patient.sex == '1' ? '男' : '女' }}</span>
                             <span class="patient-name">{{ patient.patientName }}</span>
                             <span class="patient-id">{{ patient.idNo }}</span>
                             <span class="patient-status" :class="statusClass(patient.status)">{{
-                                statusText(patient.statusText) }}</span>
-                            <button class="action-btn action-call">叫號</button>
-                            <button class="action-btn action-status">狀態</button>
+                                statusText(patient.status) }}</span>
+                            <button class="action-btn action-call" @click="callPatient(idx)">叫號</button>
+                            <button class="action-btn action-status" @click="showStatus(patient)">狀態</button>
                         </li>
                     </ul>
                 </section>
@@ -48,24 +57,13 @@
 </template>
 <script>
 import axios from 'axios'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
 export default {
     setup() {
         const patients = ref([])
 
         const sendPost = async () => {
-
-            /*
-            const testpatients = [
-                { number: '001', gender: 'male', name: '王小明', id: 'A123456789', status: 'done' },
-                { number: '002', gender: 'female', name: '李小華', id: 'B987654321', status: 'report' },
-                { number: '003', gender: 'male', name: '張大同', id: 'C456789123', status: 'done' },
-                { number: '004', gender: 'female', name: '陳美麗', id: 'D789123456', status: 'wait' },
-                { number: '005', gender: 'male', name: '林志明', id: 'E321654987', status: 'done' }
-            ];
-            */
-
             try {
                 const res = await axios.post(
                     'https://hkt-ap1.landseed.com.tw/Temp/Lesson/Patient',
@@ -84,19 +82,85 @@ export default {
 
 
         const statusMap = {
-            done: { text: '已看診', class: 'status-done' },
-            report: { text: '看報告', class: 'status-report' },
-            wait: { text: '未報到', class: 'status-wait' },
-            pending: { text: '待檢查', class: 'status-pending' }
+            1: { text: '未報到', class: 'status-wait' },
+            2: { text: '已報到', class: 'status-pending' },
+            3: { text: '已看診', class: 'status-done' },
+            4: { text: '看報告', class: 'status-report' }
         };
         const statusText = status => statusMap[status]?.text || '';
         const statusClass = status => statusMap[status]?.class || '';
+
+        const currentIndex = ref(2); // 預設叫號003
+
+        function prevPatient() {
+            if (currentIndex.value > 0) {
+                currentIndex.value--;
+            }
+        }
+
+        function nextPatient() {
+            if (currentIndex.value < patients.value.length - 1) {
+                currentIndex.value++;
+            }
+        }
+
+        const waitingCount = computed(() => {
+            // 計算目前叫號之後，狀態不是已看診的患者數
+            return patients.value.filter((p, idx) => idx > currentIndex.value && p.status !== 3).length
+        })
+
+        const waitingTime = computed(() => {
+            // 每人預估5分鐘
+            return waitingCount.value * 5
+        })
+
+        function padNumber(num) {
+            if (!num) return '---';
+            return num.toString().padStart(3, '0');
+        }
+
+        function skipPatient() {
+            // 跳到下一個未報到
+            const nextWait = patients.value.findIndex((p, idx) => idx > currentIndex.value && p.status === 'wait');
+            if (nextWait !== -1) {
+                currentIndex.value = nextWait;
+            } else {
+                alert('沒有未報到的患者');
+            }
+        }
+
+        function callPatient(idx) {
+            currentIndex.value = idx;
+        }
+
+        function showStatus(patient) {
+            alert(`姓名：${patient.patientName} 狀態: ${statusText(patient.status)}`);
+        }
+
+        const searchText = ref('');
+        const filteredPatients = computed(() => {
+            if (!searchText.value) return patients.value;
+            return patients.value.filter(p =>
+                p.idNo?.includes(searchText.value) || p.id?.includes(searchText.value)
+            );
+        });
 
         return {
             patients,
             sendPost,
             statusText,
-            statusClass
+            statusClass,
+            callPatient,
+            showStatus,
+            prevPatient,
+            nextPatient,
+            skipPatient,
+            currentIndex,
+            waitingCount,
+            waitingTime,
+            padNumber,
+            searchText,
+            filteredPatients,
         }
     }
 }
