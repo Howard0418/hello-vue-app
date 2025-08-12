@@ -1,5 +1,5 @@
 <template>
-  <p v-show="isShow">Hello World</p>
+  {{ message }}
 </template>
 
 <script>
@@ -7,7 +7,7 @@ export default {
   name: 'App',
   data() {
     return {
-      isShow: true,
+      message: 'Hello World',
     };
   },
 };

@@ -305,3 +305,39 @@ hr {
     color: #585f7b;
     font-weight: bold;
 }
+
+.vr {
+    height: 16px;
+    border-left: #3A3A3A solid 2px;
+    margin-right: 16px;
+}
+
+nav {
+    height: 30px;
+    padding: 20px 50px;
+    background-color: #ffffff;
+    font-weight: bold;
+
+    position: sticky;
+    top: 0px;
+    z-index: 5;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+nav a {
+    text-decoration: none;
+    margin-right: 16px;
+    color: #3A3A3A;
+}
+
+nav a:hover {
+    color: #D15352;
+}
+
+.content {
+    width: 70vw;
+    margin: 0px auto;
+}
